@@ -1,9 +1,17 @@
 import ContainerService from '../services/ContainerService';
-import ContainerActions from '../actions/ContainerActions';
 
-const ContainerSource = {
-  get() {
-    return ContainerService.get();
+const ContainerSource = (alt) => {
+  const ContainerActions = alt.actions.ContainerActions;
+
+  return {
+    getContainers: {
+      remote(state) {
+        return ContainerService.get();
+      },
+      loading: ContainerActions.getContainersLoading,
+      success: ContainerActions.getContainersSuccess,
+      error: ContainerActions.getContainersFail,
+    }
   }
 };
 
