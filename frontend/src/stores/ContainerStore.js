@@ -6,11 +6,15 @@ class ContainerStore {
     this.containers = [];
 
     this.bindListeners({
-      handleGetContainers: ContainerActions.GET_CONTAINERS
+      handleGetContainers: ContainerActions.GET_CONTAINERS,
+      handleUpdateContainers: ContainerActions.UPDATE_CONTAINERS,
     });
   }
 
   handleGetContainers(containers) {
+  }
+
+  handleUpdateContainers(containers) {
     this.containers = containers;
   }
 }
