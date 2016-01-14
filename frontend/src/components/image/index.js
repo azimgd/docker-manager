@@ -12,7 +12,7 @@ export default class App extends Component {
 
   componentDidMount() {
     ImageStore.listen(this.onChange.bind(this));
-    ImageActions.getImages();
+    ImageStore.getImages();
   }
 
   componentWillUnmount() {
@@ -24,7 +24,7 @@ export default class App extends Component {
   }
 
   fetchImages() {
-    ImageActions.getImages();
+    ImageStore.getImages();
   }
 
   render() {
@@ -36,18 +36,14 @@ export default class App extends Component {
           <thead>
             <tr>
               <th>ID</th>
-              <th>Image</th>
-              <th>Status</th>
-              <th>Ports</th>
+              <th>Tags</th>
             </tr>
           </thead>
           <tbody>
             {this.state.images.map((image) => {
               return <tr key={uuid.v1()}>
                 <td>{image.Id}</td>
-                <td>{image.Image}</td>
-                <td>{image.Status}</td>
-                <td>{JSON.stringify(image.Ports)}</td>
+                <td>{image.RepoTags.join()}</td>
               </tr>;
             })}
           </tbody>

@@ -8,11 +8,11 @@ export default class App extends Component {
     super(props);
 
     this.state = ContainerStore.getState();
-    this.fetchContainers();
   }
 
   componentDidMount() {
     ContainerStore.listen(this.onChange.bind(this));
+    this.fetchContainers();
   }
 
   componentWillUnmount() {
@@ -28,7 +28,6 @@ export default class App extends Component {
   }
 
   render() {
-    console.log(this.state)
     return (
       <div>
         <button onClick={this.fetchContainers.bind(this)}>Get them</button>
