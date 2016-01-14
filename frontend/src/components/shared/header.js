@@ -1,11 +1,14 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router';
 
-export default class Layout extends Component {
+import CSSModules from 'react-css-modules';
+import styles from './header.css';
+
+class Layout extends Component {
   render() {
     return (
-      <div>
-        <ul>
+      <div styleName="header">
+        <ul styleName="nav">
           <li><Link to="/containers">Containers</Link></li>
           <li><Link to="/images">Images</Link></li>
         </ul>
@@ -13,3 +16,5 @@ export default class Layout extends Component {
     );
   }
 }
+
+export default CSSModules(Layout, styles);

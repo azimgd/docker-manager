@@ -3,7 +3,10 @@ import ImageStore from '../../stores/ImageStore';
 import ImageActions from '../../actions/ImageActions';
 import uuid from 'uuid';
 
-export default class App extends Component {
+import CSSModules from 'react-css-modules';
+import styles from './image.css';
+
+class Image extends Component {
   constructor(props) {
     super(props);
 
@@ -52,3 +55,5 @@ export default class App extends Component {
     );
   }
 }
+
+export default CSSModules(Image, styles);
