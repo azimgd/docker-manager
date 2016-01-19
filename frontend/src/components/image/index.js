@@ -3,6 +3,8 @@ import ImageStore from '../../stores/ImageStore';
 import ImageActions from '../../actions/ImageActions';
 import uuid from 'uuid';
 
+import List from './sub/list';
+
 import CSSModules from 'react-css-modules';
 import styles from './image.css';
 
@@ -33,26 +35,10 @@ class Image extends Component {
 
   render() {
     return (
-      <div>
-        <button onClick={this.fetchImages.bind(this)}>Get them</button>
-
-        <table>
-          <thead>
-            <tr>
-              <th>ID</th>
-              <th>Tags</th>
-            </tr>
-          </thead>
-          <tbody>
-            {this.state.images.map((image) => {
-              return <tr key={uuid.v1()}>
-                <td>{image.Id}</td>
-                <td>{image.RepoTags.join()}</td>
-              </tr>;
-            })}
-          </tbody>
-        </table>
-      </div>
+      <List
+        images={this.state.images}
+        fetchImages={this.fetchImages.bind(this)}
+      />
     );
   }
 }
