@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const baseUrl = 'http://172.16.13.170:4000';
+const baseUrl = 'http://localhost:4000';
 
 class ImageService {
   get() {

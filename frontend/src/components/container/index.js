@@ -3,20 +3,24 @@ import ContainerStore from '../../stores/ContainerStore';
 import ContainerActions from '../../actions/ContainerActions';
 import uuid from 'uuid';
 
-export default class App extends Component {
+import CSSModules from 'react-css-modules';
+import styles from './container.css';
+
+class Container extends Component {
   constructor(props) {
     super(props);
 
+    this.onChange = this.onChange.bind(this);
     this.state = ContainerStore.getState();
   }
 
   componentDidMount() {
-    ContainerStore.listen(this.onChange.bind(this));
+    ContainerStore.listen(this.onChange);
     this.fetchContainers();
   }
 
   componentWillUnmount() {
-    ContainerStore.unlisten(this.onChange.bind(this));
+    ContainerStore.unlisten(this.onChange);
   }
 
   onChange(state) {
@@ -56,3 +60,5 @@ export default class App extends Component {
     );
   }
 }
+
+export default CSSModules(Container, styles);

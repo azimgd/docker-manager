@@ -10,16 +10,17 @@ class Image extends Component {
   constructor(props) {
     super(props);
 
+    this.onChange = this.onChange.bind(this);
     this.state = ImageStore.getState();
   }
 
   componentDidMount() {
-    ImageStore.listen(this.onChange.bind(this));
+    ImageStore.listen(this.onChange);
     ImageStore.getImages();
   }
 
   componentWillUnmount() {
-    ImageStore.unlisten(this.onChange.bind(this));
+    ImageStore.unlisten(this.onChange);
   }
 
   onChange(state) {
