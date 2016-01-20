@@ -3,8 +3,20 @@ import axios from 'axios';
 const baseUrl = 'http://localhost:4000';
 
 class ContainerService {
-  get() {
+  getContainers() {
     return axios.get(baseUrl + '/containers').then(res => res.data);
+  }
+
+  getContainer(containerId) {
+    return axios.get(baseUrl + '/containers/' + containerId).then(res => res.data);
+  }
+
+  startContainer(containerId) {
+    return axios.get(baseUrl + '/containers/' + containerId + '/start').then(res => res.data);
+  }
+
+  stopContainer(containerId) {
+    return axios.get(baseUrl + '/containers/' + containerId + '/stop').then(res => res.data);
   }
 }
 

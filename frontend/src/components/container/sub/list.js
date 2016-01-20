@@ -1,11 +1,19 @@
 import React, { Component } from 'react';
-import uuid from 'uuid';
+import { Link } from 'react-router';
 
-export default class Container extends Component {
+class Containers extends Component {
+  constructor(props) {
+    super(props);
+  }
+
+  redirect(containerId) {
+    this.context.history.pushState(null, '/containers/' + containerId)
+  }
+
   render() {
     return (
       <div>
-        <button onClick={this.props.fetchContainers}>Get them</button>
+        <button onClick={this.props.getContainers}>Get them</button>
 
         <table>
           <thead>
@@ -18,11 +26,14 @@ export default class Container extends Component {
           </thead>
           <tbody>
             {this.props.containers.map((container) => {
-              return <tr key={uuid.v1()}>
+              return <tr key={container.Id}>
                 <td>{container.Id}</td>
                 <td>{container.Image}</td>
                 <td>{container.Status}</td>
                 <td>{JSON.stringify(container.Ports)}</td>
+                <td><button onClick={this.redirect.bind(this, container.Id)}>view</button></td>
+                <td><button onClick={this.props.startContainer.bind(this, container.Id)}>startContainer</button></td>
+                <td><button onClick={this.props.stopContainer.bind(this, container.Id)}>stopContainer</button></td>
               </tr>;
             })}
           </tbody>
@@ -31,3 +42,10 @@ export default class Container extends Component {
     );
   }
 }
+
+Containers.contextTypes = {
+  location: React.PropTypes.object,
+  history: React.PropTypes.object,
+};
+
+export default Containers;
