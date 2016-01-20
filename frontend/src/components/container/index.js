@@ -19,12 +19,6 @@ class Container extends Component {
 
   componentDidMount() {
     ContainerStore.listen(this.onChange);
-
-    if(this.props.params.id) {
-      this.fetchContainer(this.props.params.id);
-    } else {
-      this.fetchContainers();
-    }
   }
 
   componentWillUnmount() {
@@ -35,12 +29,22 @@ class Container extends Component {
     this.setState(state);
   }
 
-  fetchContainers() {
+  getContainers() {
     ContainerStore.getContainers();
   }
 
   fetchContainer(containerId) {
     ContainerStore.getContainer(containerId);
+  }
+
+  startContainer(containerId) {
+    console.log(containerId);
+    ContainerStore.startContainer(containerId);
+  }
+
+  stopContainer(containerId) {
+    console.log(containerId);
+    ContainerStore.stopContainer(containerId);
   }
 
   render() {
@@ -56,7 +60,9 @@ class Container extends Component {
       return (
         <List
           containers={this.state.containers}
-          fetchContainers={this.fetchContainers.bind(this)}
+          getContainers={this.getContainers.bind(this)}
+          startContainer={this.startContainer.bind(this)}
+          stopContainer={this.stopContainer.bind(this)}
         />
       );
     }

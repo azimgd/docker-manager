@@ -13,7 +13,7 @@ class Containers extends Component {
   render() {
     return (
       <div>
-        <button onClick={this.props.fetchContainers}>Get them</button>
+        <button onClick={this.props.getContainers}>Get them</button>
 
         <table>
           <thead>
@@ -26,11 +26,14 @@ class Containers extends Component {
           </thead>
           <tbody>
             {this.props.containers.map((container) => {
-              return <tr onClick={this.redirect.bind(this, container.Id)} key={container.Id}>
+              return <tr key={container.Id}>
                 <td>{container.Id}</td>
                 <td>{container.Image}</td>
                 <td>{container.Status}</td>
                 <td>{JSON.stringify(container.Ports)}</td>
+                <td><button onClick={this.redirect.bind(this, container.Id)}>view</button></td>
+                <td><button onClick={this.props.startContainer.bind(this, container.Id)}>startContainer</button></td>
+                <td><button onClick={this.props.stopContainer.bind(this, container.Id)}>stopContainer</button></td>
               </tr>;
             })}
           </tbody>

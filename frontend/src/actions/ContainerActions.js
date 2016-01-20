@@ -25,6 +25,31 @@ class ContainerActions {
   getContainerLoading(data) {
     return data;
   }
+
+  startContainerSuccess(data) {
+    return data;
+  }
+
+  startContainerFail(data) {
+    return data;
+  }
+
+  startContainerLoading(data) {
+    return data;
+  }
+
+  stopContainerSuccess(data) {
+    return data;
+  }
+
+  stopContainerFail(data) {
+    return data;
+  }
+
+  stopContainerLoading(data) {
+    return data;
+  }
+
 }
 
 module.exports = alt.createActions(ContainerActions);

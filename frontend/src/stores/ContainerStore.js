@@ -45,6 +45,30 @@ class ContainerStore {
   onGetContainerSuccess(container) {
     this.setState({ container });
   }
+
+  onStartContainerFail(container) {
+    console.log('failed')
+  }
+
+  onStartContainerLoading(container) {
+    console.log('loading')
+  }
+
+  onStartContainerSuccess(container) {
+    console.log('started')
+  }
+
+  onStopContainerFail(container) {
+    console.log('failed')
+  }
+
+  onStopContainerLoading(container) {
+    console.log('loading')
+  }
+
+  onStopContainerSuccess(container) {
+    console.log('started')
+  }
 }
 
 module.exports = alt.createStore(ContainerStore, 'ContainerStore');

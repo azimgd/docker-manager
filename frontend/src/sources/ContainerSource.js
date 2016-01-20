@@ -20,6 +20,24 @@ const ContainerSource = (alt) => {
       loading: ContainerActions.getContainerLoading,
       success: ContainerActions.getContainerSuccess,
       error: ContainerActions.getContainerFail,
+    },
+
+    startContainer: {
+      remote(state, containerId) {
+        return ContainerService.startContainer(containerId);
+      },
+      loading: ContainerActions.startContainerLoading,
+      success: ContainerActions.startContainerSuccess,
+      error: ContainerActions.startContainerFail,
+    },
+
+    stopContainer: {
+      remote(state, containerId) {
+        return ContainerService.stopContainer(containerId);
+      },
+      loading: ContainerActions.stopContainerLoading,
+      success: ContainerActions.stopContainerSuccess,
+      error: ContainerActions.stopContainerFail,
     }
   }
 };
