@@ -21,6 +21,48 @@ const listContainers = () => {
   });
 }
 
+const inspectContainer = (containerId) => {
+  return new Promise((resolve, reject) => {
+    const container = docker.getContainer(containerId);
+
+    container.inspect(function (err, data) {
+      if(err) {
+        return reject(err);
+      }
+
+      return resolve(data);
+    })
+  });
+}
+
+const startContainer = (containerId) => {
+  return new Promise((resolve, reject) => {
+    const container = docker.getContainer(containerId);
+
+    container.start(function (err, data) {
+      if(err) {
+        return reject(err);
+      }
+
+      return resolve(data);
+    })
+  });
+}
+
+const stopContainer = (containerId) => {
+  return new Promise((resolve, reject) => {
+    const container = docker.getContainer(containerId);
+
+    container.stop(function (err, data) {
+      if(err) {
+        return reject(err);
+      }
+
+      return resolve(data);
+    })
+  });
+}
+
 const listImages = () => {
   return new Promise((resolve, reject) => {
     docker.listImages((err, images) => {
@@ -36,5 +78,8 @@ const listImages = () => {
 
 export default {
   listContainers,
+  inspectContainer,
+  startContainer,
+  stopContainer,
   listImages
 };
