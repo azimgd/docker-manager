@@ -4,6 +4,7 @@ import ContainerActions from '../../actions/ContainerActions';
 import uuid from 'uuid';
 
 import List from './sub/list';
+import Show from './sub/show';
 
 import CSSModules from 'react-css-modules';
 import styles from './container.css';
@@ -18,7 +19,12 @@ class Container extends Component {
 
   componentDidMount() {
     ContainerStore.listen(this.onChange);
-    this.fetchContainers();
+
+    if(this.props.params.id) {
+      this.fetchContainer(this.props.params.id);
+    } else {
+      this.fetchContainers();
+    }
   }
 
   componentWillUnmount() {
@@ -33,13 +39,27 @@ class Container extends Component {
     ContainerStore.getContainers();
   }
 
+  fetchContainer(containerId) {
+    ContainerStore.getContainer(containerId);
+  }
+
   render() {
-    return (
-      <List
-        containers={this.state.containers}
-        fetchContainers={this.fetchContainers.bind(this)}
-      />
-    );
+    if(this.props.params.id) {
+      return (
+        <Show
+          container={this.state.container}
+        />
+      );
+    }
+
+    else {
+      return (
+        <List
+          containers={this.state.containers}
+          fetchContainers={this.fetchContainers.bind(this)}
+        />
+      );
+    }
   }
 }
 

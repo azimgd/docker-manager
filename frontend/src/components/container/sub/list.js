@@ -1,7 +1,15 @@
 import React, { Component } from 'react';
-import uuid from 'uuid';
+import { Link } from 'react-router';
 
-export default class Container extends Component {
+class Containers extends Component {
+  constructor(props) {
+    super(props);
+  }
+
+  redirect(containerId) {
+    this.context.history.pushState(null, '/containers/' + containerId)
+  }
+
   render() {
     return (
       <div>
@@ -18,7 +26,7 @@ export default class Container extends Component {
           </thead>
           <tbody>
             {this.props.containers.map((container) => {
-              return <tr key={uuid.v1()}>
+              return <tr onClick={this.redirect.bind(this, container.Id)} key={container.Id}>
                 <td>{container.Id}</td>
                 <td>{container.Image}</td>
                 <td>{container.Status}</td>
@@ -31,3 +39,10 @@ export default class Container extends Component {
     );
   }
 }
+
+Containers.contextTypes = {
+  location: React.PropTypes.object,
+  history: React.PropTypes.object,
+};
+
+export default Containers;

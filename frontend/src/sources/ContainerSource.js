@@ -6,11 +6,20 @@ const ContainerSource = (alt) => {
   return {
     getContainers: {
       remote(state) {
-        return ContainerService.get();
+        return ContainerService.getContainers();
       },
       loading: ContainerActions.getContainersLoading,
       success: ContainerActions.getContainersSuccess,
       error: ContainerActions.getContainersFail,
+    },
+
+    getContainer: {
+      remote(state, containerId) {
+        return ContainerService.getContainer(containerId);
+      },
+      loading: ContainerActions.getContainerLoading,
+      success: ContainerActions.getContainerSuccess,
+      error: ContainerActions.getContainerFail,
     }
   }
 };
