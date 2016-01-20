@@ -12,62 +12,93 @@ class ContainerStore {
       onGetContainerSuccess: ContainerActions.GET_CONTAINER_SUCCESS,
       onGetContainerLoading: ContainerActions.GET_CONTAINER_LOADING,
       onGetContainerFail: ContainerActions.GET_CONTAINER_FAIL,
+
+      onStartContainerSuccess: ContainerActions.START_CONTAINER_SUCCESS,
+      onStartContainerLoading: ContainerActions.START_CONTAINER_LOADING,
+      onStartContainerFail: ContainerActions.START_CONTAINER_FAIL,
+
+      onStopContainerSuccess: ContainerActions.STOP_CONTAINER_SUCCESS,
+      onStopContainerLoading: ContainerActions.STOP_CONTAINER_LOADING,
+      onStopContainerFail: ContainerActions.STOP_CONTAINER_FAIL,
+
+      onClearErrors: ContainerActions.CLEAR_ERRORS,
     });
 
     this.registerAsync(ContainerSource);
 
     this.state = {
       containers: [],
-      container: {}
+      container: {},
+      errors: [],
+      msgs: [],
+      isLoading: {
+        getContainers: false,
+        getContainer: false,
+        startContainer: false,
+        stopContainer: false,
+      },
     };
   }
 
-  onGetContainersFail(containers) {
-    console.log('failed')
+  onGetContainersFail(err) {
+    this.state.isLoading.getContainers = false;
+    this.state.errors = [err.data.reason];
   }
 
   onGetContainersLoading(containers) {
-    console.log('loading')
+    this.state.isLoading.getContainers = true;
   }
 
   onGetContainersSuccess(containers) {
-    this.setState({ containers });
+    this.state.isLoading.getContainers = false;
+    this.state.containers = containers;
   }
 
-  onGetContainerFail(container) {
-    console.log('failed')
+  onGetContainerFail(err) {
+    this.state.isLoading.getContainer = false;
+    this.state.errors = [err.data.reason];
   }
 
   onGetContainerLoading(container) {
-    console.log('loading')
+    this.state.isLoading.getContainer = true;
   }
 
   onGetContainerSuccess(container) {
-    this.setState({ container });
+    this.state.isLoading.getContainer = false;
+    this.state.container = container;
   }
 
-  onStartContainerFail(container) {
-    console.log('failed')
+  onStartContainerFail(err) {
+    this.state.isLoading.startContainer = false;
+    this.state.errors = [err.data.reason];
   }
 
   onStartContainerLoading(container) {
-    console.log('loading')
+    this.state.isLoading.startContainer = true;
   }
 
   onStartContainerSuccess(container) {
-    console.log('started')
+    this.state.isLoading.startContainer = false;
   }
 
-  onStopContainerFail(container) {
-    console.log('failed')
+  onStopContainerFail(err) {
+    this.state.isLoading.stopContainer = false;
+    this.state.errors = [err.data.reason];
   }
 
   onStopContainerLoading(container) {
-    console.log('loading')
+    this.state.isLoading.stopContainer = true;
   }
 
   onStopContainerSuccess(container) {
-    console.log('started')
+    this.state.isLoading.stopContainer = false;
+  }
+
+  /**
+   *
+   */
+  onClearErrors() {
+    this.state.errors = [];
   }
 }
 

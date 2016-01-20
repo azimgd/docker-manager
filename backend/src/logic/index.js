@@ -25,7 +25,7 @@ const inspectContainer = (containerId) => {
   return new Promise((resolve, reject) => {
     const container = docker.getContainer(containerId);
 
-    container.inspect(function (err, data) {
+    container.inspect((err, data) => {
       if(err) {
         return reject(err);
       }
@@ -39,7 +39,7 @@ const startContainer = (containerId) => {
   return new Promise((resolve, reject) => {
     const container = docker.getContainer(containerId);
 
-    container.start(function (err, data) {
+    container.start((err, data) => {
       if(err) {
         return reject(err);
       }
@@ -53,7 +53,7 @@ const stopContainer = (containerId) => {
   return new Promise((resolve, reject) => {
     const container = docker.getContainer(containerId);
 
-    container.stop(function (err, data) {
+    container.stop((err, data) => {
       if(err) {
         return reject(err);
       }

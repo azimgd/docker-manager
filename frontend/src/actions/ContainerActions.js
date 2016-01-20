@@ -6,8 +6,8 @@ class ContainerActions {
     return data;
   }
 
-  getContainersFail(data) {
-    return data;
+  getContainersFail(err) {
+    return err;
   }
 
   getContainersLoading(data) {
@@ -18,8 +18,8 @@ class ContainerActions {
     return data;
   }
 
-  getContainerFail(data) {
-    return data;
+  getContainerFail(err) {
+    return err;
   }
 
   getContainerLoading(data) {
@@ -30,8 +30,8 @@ class ContainerActions {
     return data;
   }
 
-  startContainerFail(data) {
-    return data;
+  startContainerFail(err) {
+    return err;
   }
 
   startContainerLoading(data) {
@@ -42,14 +42,20 @@ class ContainerActions {
     return data;
   }
 
-  stopContainerFail(data) {
-    return data;
+  stopContainerFail(err) {
+    return err;
   }
 
   stopContainerLoading(data) {
     return data;
   }
 
+  /**
+   * 
+   */
+  clearErrors(err = '') {
+    return err;
+  }
 }
 
 module.exports = alt.createActions(ContainerActions);

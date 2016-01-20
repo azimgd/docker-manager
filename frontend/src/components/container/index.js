@@ -38,34 +38,36 @@ class Container extends Component {
   }
 
   startContainer(containerId) {
-    console.log(containerId);
     ContainerStore.startContainer(containerId);
   }
 
   stopContainer(containerId) {
-    console.log(containerId);
     ContainerStore.stopContainer(containerId);
   }
 
   render() {
-    if(this.props.params.id) {
-      return (
-        <Show
-          container={this.state.container}
-        />
-      );
-    }
+    return (
+      <div>
+        {this.state.errors.map((error) =>
+          <div key={uuid.v1()}>{error}</div>
+        )}
 
-    else {
-      return (
-        <List
-          containers={this.state.containers}
-          getContainers={this.getContainers.bind(this)}
-          startContainer={this.startContainer.bind(this)}
-          stopContainer={this.stopContainer.bind(this)}
-        />
-      );
-    }
+        {this.props.params.id ?
+          <Show
+            container={this.state.container}
+          />
+        : null}
+
+        {!this.props.params.id ?
+          <List
+            containers={this.state.containers}
+            getContainers={this.getContainers.bind(this)}
+            startContainer={this.startContainer.bind(this)}
+            stopContainer={this.stopContainer.bind(this)}
+          />
+        : null}
+      </div>
+    );
   }
 }
 
