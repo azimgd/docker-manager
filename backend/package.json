@@ -1,4 +1,26 @@
 {
+  "name": "react-docker-manager",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "start": "node server.js",
+    "lint": "eslint src"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/azimgd/docker-manager.git"
+  },
+  "keywords": [
+    "react",
+    "reactjs",
+    "docker"
+  ],
+  "author": "Azim Gadzhiagayev <me@azimgd.com> (http://github.com/azimgd)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/azimgd/docker-manager/issues"
+  },
+  "homepage": "https://github.com/azimgd/docker-manager",
   "dependencies": {
     "express": "^4.13.3"
   },
