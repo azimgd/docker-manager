@@ -75,6 +75,26 @@ const listImages = () => {
   });
 }
 
+const createContainer = (cfg) => {
+  const config = Object.assign({
+    Image: 'ubuntu',
+    Cmd: ['/bin/bash'],
+    name: 'ubuntu-test'
+  }, cfg);
+
+  return new Promise((resolve, reject) => {
+    docker.createContainer(config, (err, container) => {
+      container.start((err, data) => {
+        if(err) {
+          return reject(err);
+        }
+
+        return resolve(images);
+      });
+    });
+  });
+}
+
 
 export default {
   listContainers,
