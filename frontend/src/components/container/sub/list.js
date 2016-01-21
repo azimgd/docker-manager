@@ -33,7 +33,7 @@ class Containers extends Component {
             {this.props.containers.map((container) => {
               return (
                 <tr key={container.Id}>
-                  <td>{container.Id}</td>
+                  <td>{container.Id.substring(0, 12)}</td>
                   <td>{container.Image}</td>
                   <td>{container.Status}</td>
                   <td>{JSON.stringify(container.Ports)}</td>

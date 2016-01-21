@@ -4,7 +4,7 @@ class Show extends Component {
   render() {
     return (
       <pre>
-          { JSON.stringify(this.props, null, '  ') }
+          { JSON.stringify(this.props, null, 2) }
       </pre>
     );
   }

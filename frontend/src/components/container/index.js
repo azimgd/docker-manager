@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import ContainerStore from '../../stores/ContainerStore';
-import uuid from 'uuid';
 
+import Alerts from '../shared/alerts';
 import List from './sub/list';
 import Show from './sub/show';
 
@@ -47,9 +47,10 @@ class Container extends Component {
   render() {
     return (
       <div>
-        {this.state.errors.map((error) =>
-          <div key={uuid.v1()}>{error}</div>
-        )}
+        <Alerts
+          errors={this.state.errors}
+          msgs={this.state.msgs}
+        />
 
         {this.props.params.id ?
           <Show

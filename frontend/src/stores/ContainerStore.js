@@ -49,9 +49,10 @@ class ContainerStore {
     this.state.isLoading.getContainers = true;
   }
 
-  onGetContainersSuccess(containers) {
+  onGetContainersSuccess(res) {
     this.state.isLoading.getContainers = false;
-    this.state.containers = containers;
+    this.state.msgs = [res.reason];
+    this.state.containers = res.data;
   }
 
   onGetContainerFail(err) {
@@ -63,9 +64,10 @@ class ContainerStore {
     this.state.isLoading.getContainer = true;
   }
 
-  onGetContainerSuccess(container) {
+  onGetContainerSuccess(res) {
     this.state.isLoading.getContainer = false;
-    this.state.container = container;
+    this.state.msgs = [res.reason];
+    this.state.container = res.data;
   }
 
   onStartContainerFail(err) {
@@ -77,8 +79,9 @@ class ContainerStore {
     this.state.isLoading.startContainer = true;
   }
 
-  onStartContainerSuccess(container) {
+  onStartContainerSuccess(res) {
     this.state.isLoading.startContainer = false;
+    this.state.msgs = [res.reason];
   }
 
   onStopContainerFail(err) {
@@ -90,8 +93,9 @@ class ContainerStore {
     this.state.isLoading.stopContainer = true;
   }
 
-  onStopContainerSuccess(container) {
+  onStopContainerSuccess(res) {
     this.state.isLoading.stopContainer = false;
+    this.state.msgs = [res.reason];
   }
 
   /**

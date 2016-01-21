@@ -21,6 +21,14 @@ const startContainer = (req, res) => {
     .catch(err => res.status(500).json(err));
 };
 
+const restartContainer = (req, res) => {
+  const containerId = req.params.id || null;
+
+  Docker.restartContainer(containerId)
+    .then(data => res.json(data))
+    .catch(err => res.status(500).json(err));
+};
+
 const stopContainer = (req, res) => {
   const containerId = req.params.id || null;
 
@@ -38,6 +46,7 @@ const getImages = (req, res) => {
 Express.get('/containers', getContainers);
 Express.get('/containers/:id', inspectContainer);
 Express.get('/containers/:id/start', startContainer);
+Express.get('/containers/:id/restart', restartContainer);
 Express.get('/containers/:id/stop', stopContainer);
 Express.get('/images', getImages);
 

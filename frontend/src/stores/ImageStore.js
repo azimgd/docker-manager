@@ -14,17 +14,27 @@ class ImageStore {
 
     this.state = {
       images: [],
+      errors: [],
+      msgs: [],
+      isLoading: {
+        getImages: false,
+      },
     };
   }
 
   onGetImagesFail(err) {
+    this.state.isLoading.getImages = false;
+    this.state.errors = err.reason;
   }
 
   onGetImagesLoading() {
+    this.state.isLoading.getImages = true;
   }
 
-  onGetImagesSuccess(images) {
-    this.setState({ images });
+  onGetImagesSuccess(res) {
+    this.state.isLoading.getImages = false;
+    this.state.msgs = res.reason;
+    this.state.images = res.data;
   }
 }
 
