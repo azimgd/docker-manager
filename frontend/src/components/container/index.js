@@ -6,7 +6,7 @@ import List from './sub/list';
 import Show from './sub/show';
 
 import cssmodules from 'react-css-modules';
-import styles from './container.css';
+import styles from './container.styl';
 
 class Container extends Component {
   constructor(props) {

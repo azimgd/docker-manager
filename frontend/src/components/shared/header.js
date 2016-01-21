@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import { Link } from 'react-router';
 
 import cssmodules from 'react-css-modules';
-import styles from './header.css';
+import styles from './header.styl';
 
-class Layout extends Component {
+class Header2 extends Component {
   render() {
     return (
       <div styleName="header">
@@ -17,4 +17,4 @@ class Layout extends Component {
   }
 }
 
-export default cssmodules(Layout, styles);
+export default cssmodules(Header2, styles);

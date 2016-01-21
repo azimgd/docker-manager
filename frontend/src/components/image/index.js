@@ -4,7 +4,7 @@ import ImageStore from '../../stores/ImageStore';
 import List from './sub/list';
 
 import cssmodules from 'react-css-modules';
-import styles from './image.css';
+import styles from './image.styl';
 
 class Image extends Component {
   constructor(props) {

@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 
 import Header from './header';
 
+import cssmodules from 'react-css-modules';
+import styles from './layout.styl';
+
 class Layout extends Component {
   render() {
     return (
@@ -14,4 +17,4 @@ class Layout extends Component {
   }
 }
 
-export default Layout;
+export default cssmodules(Layout, styles);
