@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import uuid from 'uuid';
 
-export default class Image extends Component {
+class Image extends Component {
   render() {
     return (
       <div>
@@ -27,3 +27,10 @@ export default class Image extends Component {
     );
   }
 }
+
+Image.propTypes = {
+  fetchImages: React.PropTypes.func.isRequired,
+  images: React.PropTypes.array.isRequired,
+};
+
+export default Image;

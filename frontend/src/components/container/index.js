@@ -71,4 +71,8 @@ class Container extends Component {
   }
 }
 
+Container.propTypes = {
+  params: React.PropTypes.object.isRequired
+};
+
 export default CSSModules(Container, styles);

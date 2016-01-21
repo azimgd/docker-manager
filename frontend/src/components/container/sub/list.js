@@ -48,4 +48,11 @@ Containers.contextTypes = {
   history: React.PropTypes.object,
 };
 
+Containers.propTypes = {
+  getContainers: React.PropTypes.func.isRequired,
+  startContainer: React.PropTypes.func.isRequired,
+  stopContainer: React.PropTypes.func.isRequired,
+  containers: React.PropTypes.array.isRequired,
+};
+
 export default Containers;
