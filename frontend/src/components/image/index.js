@@ -1,11 +1,9 @@
 import React, { Component } from 'react';
 import ImageStore from '../../stores/ImageStore';
-import ImageActions from '../../actions/ImageActions';
-import uuid from 'uuid';
 
 import List from './sub/list';
 
-import CSSModules from 'react-css-modules';
+import cssmodules from 'react-css-modules';
 import styles from './image.css';
 
 class Image extends Component {
@@ -43,4 +41,4 @@ class Image extends Component {
   }
 }
 
-export default CSSModules(Image, styles);
+export default cssmodules(Image, styles);

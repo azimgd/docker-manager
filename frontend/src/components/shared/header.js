@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router';
 
-import CSSModules from 'react-css-modules';
+import cssmodules from 'react-css-modules';
 import styles from './header.css';
 
 class Layout extends Component {
@@ -17,4 +17,4 @@ class Layout extends Component {
   }
 }
 
-export default CSSModules(Layout, styles);
+export default cssmodules(Layout, styles);

@@ -11,8 +11,8 @@ const ImageSource = (alt) => {
       loading: ImageActions.getImagesLoading,
       success: ImageActions.getImagesSuccess,
       error: ImageActions.getImagesFail,
-    }
-  }
+    },
+  };
 };
 
 export default ImageSource;

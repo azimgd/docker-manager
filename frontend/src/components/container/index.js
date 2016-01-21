@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
 import ContainerStore from '../../stores/ContainerStore';
-import ContainerActions from '../../actions/ContainerActions';
 import uuid from 'uuid';
 
 import List from './sub/list';
 import Show from './sub/show';
 
-import CSSModules from 'react-css-modules';
+import cssmodules from 'react-css-modules';
 import styles from './container.css';
 
 class Container extends Component {
@@ -72,7 +71,7 @@ class Container extends Component {
 }
 
 Container.propTypes = {
-  params: React.PropTypes.object.isRequired
+  params: React.PropTypes.object.isRequired,
 };
 
-export default CSSModules(Container, styles);
+export default cssmodules(Container, styles);

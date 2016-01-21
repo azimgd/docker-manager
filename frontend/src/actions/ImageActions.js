@@ -1,5 +1,4 @@
 import alt from '../utils/alt';
-import ImageSource from '../sources/ImageSource';
 
 class ImageActions {
   getImagesSuccess(data) {

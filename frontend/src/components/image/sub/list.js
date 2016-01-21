@@ -16,10 +16,12 @@ class Image extends Component {
           </thead>
           <tbody>
             {this.props.images.map((image) => {
-              return <tr key={uuid.v1()}>
-                <td>{image.Id}</td>
-                <td>{image.RepoTags.join()}</td>
-              </tr>;
+              return (
+                <tr key={uuid.v1()}>
+                  <td>{image.Id}</td>
+                  <td>{image.RepoTags.join()}</td>
+                </tr>
+              );
             })}
           </tbody>
         </table>

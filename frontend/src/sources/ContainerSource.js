@@ -38,8 +38,8 @@ const ContainerSource = (alt) => {
       loading: ContainerActions.stopContainerLoading,
       success: ContainerActions.stopContainerSuccess,
       error: ContainerActions.stopContainerFail,
-    }
-  }
+    },
+  };
 };
 
 export default ContainerSource;

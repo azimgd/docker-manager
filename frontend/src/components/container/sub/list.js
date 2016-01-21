@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router';
 
 class Containers extends Component {
   constructor(props) {
@@ -7,10 +6,13 @@ class Containers extends Component {
   }
 
   redirect(containerId) {
-    this.context.history.pushState(null, '/containers/' + containerId)
+    this.context.history.pushState(null, '/containers/' + containerId);
   }
 
   render() {
+    const startContainer = this.props.startContainer;
+    const stopContainer = this.props.stopContainer;
+
     return (
       <div>
         <button onClick={this.props.getContainers}>Get them</button>
@@ -26,15 +28,17 @@ class Containers extends Component {
           </thead>
           <tbody>
             {this.props.containers.map((container) => {
-              return <tr key={container.Id}>
-                <td>{container.Id}</td>
-                <td>{container.Image}</td>
-                <td>{container.Status}</td>
-                <td>{JSON.stringify(container.Ports)}</td>
-                <td><button onClick={this.redirect.bind(this, container.Id)}>view</button></td>
-                <td><button onClick={this.props.startContainer.bind(this, container.Id)}>startContainer</button></td>
-                <td><button onClick={this.props.stopContainer.bind(this, container.Id)}>stopContainer</button></td>
-              </tr>;
+              return (
+                <tr key={container.Id}>
+                  <td>{container.Id}</td>
+                  <td>{container.Image}</td>
+                  <td>{container.Status}</td>
+                  <td>{JSON.stringify(container.Ports)}</td>
+                  <td><button onClick={this.redirect.bind(this, container.Id)}>view</button></td>
+                  <td><button onClick={startContainer.bind(this, container.Id)}>startContainer</button></td>
+                  <td><button onClick={stopContainer.bind(this, container.Id)}>stopContainer</button></td>
+                </tr>
+              );
             })}
           </tbody>
         </table>

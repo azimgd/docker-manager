@@ -13,16 +13,14 @@ class ImageStore {
     this.registerAsync(ImageSource);
 
     this.state = {
-      images: []
+      images: [],
     };
   }
 
-  onGetImagesFail(images) {
-    console.log('failed')
+  onGetImagesFail(err) {
   }
 
-  onGetImagesLoading(images) {
-    console.log('loading')
+  onGetImagesLoading() {
   }
 
   onGetImagesSuccess(images) {

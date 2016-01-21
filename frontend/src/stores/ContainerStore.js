@@ -45,7 +45,7 @@ class ContainerStore {
     this.state.errors = [err.data.reason];
   }
 
-  onGetContainersLoading(containers) {
+  onGetContainersLoading() {
     this.state.isLoading.getContainers = true;
   }
 
@@ -59,7 +59,7 @@ class ContainerStore {
     this.state.errors = [err.data.reason];
   }
 
-  onGetContainerLoading(container) {
+  onGetContainerLoading() {
     this.state.isLoading.getContainer = true;
   }
 
@@ -73,7 +73,7 @@ class ContainerStore {
     this.state.errors = [err.data.reason];
   }
 
-  onStartContainerLoading(container) {
+  onStartContainerLoading() {
     this.state.isLoading.startContainer = true;
   }
 
@@ -86,7 +86,7 @@ class ContainerStore {
     this.state.errors = [err.data.reason];
   }
 
-  onStopContainerLoading(container) {
+  onStopContainerLoading() {
     this.state.isLoading.stopContainer = true;
   }
 

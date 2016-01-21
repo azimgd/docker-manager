@@ -7,7 +7,6 @@ import Container from './components/container/index';
 import Image from './components/image/index';
 
 import ContainerStore from './stores/ContainerStore';
-import ContainerActions from './actions/ContainerActions';
 
 const onEnter = {
   containers: {

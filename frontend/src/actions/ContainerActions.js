@@ -1,5 +1,4 @@
 import alt from '../utils/alt';
-import ContainerSource from '../sources/ContainerSource';
 
 class ContainerActions {
   getContainersSuccess(data) {
@@ -51,7 +50,7 @@ class ContainerActions {
   }
 
   /**
-   * 
+   * Common
    */
   clearErrors(err = '') {
     return err;
