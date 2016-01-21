@@ -24,6 +24,9 @@ class Containers extends Component {
               <th>Image</th>
               <th>Status</th>
               <th>Ports</th>
+              <th></th>
+              <th></th>
+              <th></th>
             </tr>
           </thead>
           <tbody>
