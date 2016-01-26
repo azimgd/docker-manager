@@ -22,6 +22,8 @@
   },
   "homepage": "https://github.com/azimgd/docker-manager",
   "dependencies": {
+    "babel-register": "^6.4.3",
+    "dockerode": "^2.2.9",
     "express": "^4.13.3"
   },
   "devDependencies": {

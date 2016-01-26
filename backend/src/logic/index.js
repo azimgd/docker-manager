@@ -1,12 +1,7 @@
 import fs from 'fs';
 import Docker from 'dockerode';
 const docker = new Docker({
-  protocol: 'https',
-  host: '192.168.99.100',
-  port: process.env.DOCKER_PORT || 2376,
-  ca: fs.readFileSync(process.env.DOCKER_CERT_PATH + '/ca.pem'),
-  cert: fs.readFileSync(process.env.DOCKER_CERT_PATH + '/cert.pem'),
-  key: fs.readFileSync(process.env.DOCKER_CERT_PATH + '/key.pem')
+  socketPath: '/var/run/docker.sock'
 });
 
 const listContainers = (all = 'true') => {
