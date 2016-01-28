@@ -18,6 +18,10 @@ class ContainerService {
   stopContainer(containerId) {
     return axios.get(baseUrl + '/containers/' + containerId + '/stop').then(res => res.data);
   }
+
+  restartContainer(containerId) {
+    return axios.get(baseUrl + '/containers/' + containerId + '/restart').then(res => res.data);
+  }
 }
 
 export default new ContainerService();

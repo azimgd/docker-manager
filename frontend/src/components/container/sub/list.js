@@ -16,6 +16,7 @@ class Containers extends Component {
   render() {
     const startContainer = this.props.startContainer;
     const stopContainer = this.props.stopContainer;
+    const restartContainer = this.props.restartContainer;
 
     return (
       <div>
@@ -47,7 +48,10 @@ class Containers extends Component {
                   <td><button onClick={this.redirect.bind(this, container.Id)}>view</button></td>
                   <td>
                     {isRunning ?
-                      <button onClick={stopContainer.bind(this, container.Id)}>stopContainer</button>
+                      <div>
+                        <button onClick={stopContainer.bind(this, container.Id)}>stopContainer</button>
+                        <button onClick={restartContainer.bind(this, container.Id)}>restartContainer</button>
+                      </div>
                     :
                       <button onClick={startContainer.bind(this, container.Id)}>startContainer</button>
                     }
@@ -71,6 +75,7 @@ Containers.propTypes = {
   getContainers: React.PropTypes.func.isRequired,
   startContainer: React.PropTypes.func.isRequired,
   stopContainer: React.PropTypes.func.isRequired,
+  restartContainer: React.PropTypes.func.isRequired,
   containers: React.PropTypes.array.isRequired,
 };
 

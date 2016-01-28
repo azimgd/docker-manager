@@ -49,6 +49,18 @@ class ContainerActions {
     return data;
   }
 
+  restartContainerSuccess(data) {
+    return data;
+  }
+
+  restartContainerFail(err) {
+    return err;
+  }
+
+  restartContainerLoading(data) {
+    return data;
+  }
+
   /**
    * Common
    */

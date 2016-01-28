@@ -16,6 +16,7 @@ class Container extends Component {
     this.getContainers = this.getContainers.bind(this);
     this.startContainer = this.startContainer.bind(this);
     this.stopContainer = this.stopContainer.bind(this);
+    this.restartContainer = this.restartContainer.bind(this);
     this.state = ContainerStore.getState();
   }
 
@@ -47,6 +48,10 @@ class Container extends Component {
     ContainerStore.stopContainer(containerId);
   }
 
+  restartContainer(containerId) {
+    ContainerStore.restartContainer(containerId);
+  }
+
   render() {
     return (
       <div>
@@ -67,6 +72,7 @@ class Container extends Component {
             getContainers={this.getContainers}
             startContainer={this.startContainer}
             stopContainer={this.stopContainer}
+            restartContainer={this.restartContainer}
           />
         : null}
       </div>

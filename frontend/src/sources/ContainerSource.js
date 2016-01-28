@@ -39,6 +39,15 @@ const ContainerSource = (alt) => {
       success: ContainerActions.stopContainerSuccess,
       error: ContainerActions.stopContainerFail,
     },
+
+    restartContainer: {
+      remote(state, containerId) {
+        return ContainerService.restartContainer(containerId);
+      },
+      loading: ContainerActions.restartContainerLoading,
+      success: ContainerActions.restartContainerSuccess,
+      error: ContainerActions.restartContainerFail,
+    },
   };
 };
 

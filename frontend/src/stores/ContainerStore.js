@@ -21,6 +21,10 @@ class ContainerStore {
       onStopContainerLoading: ContainerActions.STOP_CONTAINER_LOADING,
       onStopContainerFail: ContainerActions.STOP_CONTAINER_FAIL,
 
+      onRestartContainerSuccess: ContainerActions.RESTART_CONTAINER_SUCCESS,
+      onRestartContainerLoading: ContainerActions.RESTART_CONTAINER_LOADING,
+      onRestartContainerFail: ContainerActions.RESTART_CONTAINER_FAIL,
+
       onClearErrors: ContainerActions.CLEAR_ERRORS,
     });
 
@@ -36,6 +40,7 @@ class ContainerStore {
         getContainer: false,
         startContainer: false,
         stopContainer: false,
+        restartContainer: false,
       },
     };
   }
@@ -96,6 +101,21 @@ class ContainerStore {
 
   onStopContainerSuccess(res) {
     this.state.isLoading.stopContainer = false;
+    this.state.msgs = [res.reason];
+    this.state.containers = res.data.Containers;
+  }
+
+  onRestartContainerFail(err) {
+    this.state.isLoading.restartContainer = false;
+    this.state.errors = [err.data.reason];
+  }
+
+  onRestartContainerLoading() {
+    this.state.isLoading.restartContainer = true;
+  }
+
+  onRestartContainerSuccess(res) {
+    this.state.isLoading.restartContainer = false;
     this.state.msgs = [res.reason];
     this.state.containers = res.data.Containers;
   }
