@@ -13,6 +13,9 @@ class Container extends Component {
     super(props);
 
     this.onChange = this.onChange.bind(this);
+    this.getContainers = this.getContainers.bind(this);
+    this.startContainer = this.startContainer.bind(this);
+    this.stopContainer = this.stopContainer.bind(this);
     this.state = ContainerStore.getState();
   }
 
@@ -61,9 +64,9 @@ class Container extends Component {
         {!this.props.params.id ?
           <List
             containers={this.state.containers}
-            getContainers={this.getContainers.bind(this)}
-            startContainer={this.startContainer.bind(this)}
-            stopContainer={this.stopContainer.bind(this)}
+            getContainers={this.getContainers}
+            startContainer={this.startContainer}
+            stopContainer={this.stopContainer}
           />
         : null}
       </div>

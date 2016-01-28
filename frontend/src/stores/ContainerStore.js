@@ -82,6 +82,7 @@ class ContainerStore {
   onStartContainerSuccess(res) {
     this.state.isLoading.startContainer = false;
     this.state.msgs = [res.reason];
+    this.state.containers = res.data.Containers;
   }
 
   onStopContainerFail(err) {
@@ -96,6 +97,7 @@ class ContainerStore {
   onStopContainerSuccess(res) {
     this.state.isLoading.stopContainer = false;
     this.state.msgs = [res.reason];
+    this.state.containers = res.data.Containers;
   }
 
   /**

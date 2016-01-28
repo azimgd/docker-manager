@@ -5,7 +5,9 @@ class Image extends Component {
   render() {
     return (
       <div>
-        <button onClick={this.props.fetchImages}>Get them</button>
+        <div style={{ marginBottom: '20px' }}>
+          <button onClick={this.props.fetchImages}>Refresh images</button>
+        </div>
 
         <table>
           <thead>

@@ -11,6 +11,7 @@ class Image extends Component {
     super(props);
 
     this.onChange = this.onChange.bind(this);
+    this.fetchImages = this.fetchImages.bind(this);
     this.state = ImageStore.getState();
   }
 
@@ -35,7 +36,7 @@ class Image extends Component {
     return (
       <List
         images={this.state.images}
-        fetchImages={this.fetchImages.bind(this)}
+        fetchImages={this.fetchImages}
       />
     );
   }

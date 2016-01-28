@@ -9,13 +9,19 @@ class Containers extends Component {
     this.context.history.pushState(null, '/containers/' + containerId);
   }
 
+  isContainerRunning(container) {
+    return container.Status.substring(0, 2) === 'Up';
+  }
+
   render() {
     const startContainer = this.props.startContainer;
     const stopContainer = this.props.stopContainer;
 
     return (
       <div>
-        <button onClick={this.props.getContainers}>Get them</button>
+        <div style={{ marginBottom: '20px' }}>
+          <button onClick={this.props.getContainers}>Refresh Containers</button>
+        </div>
 
         <table>
           <thead>
@@ -26,11 +32,12 @@ class Containers extends Component {
               <th>Ports</th>
               <th></th>
               <th></th>
-              <th></th>
             </tr>
           </thead>
           <tbody>
             {this.props.containers.map((container) => {
+              const isRunning = this.isContainerRunning(container);
+
               return (
                 <tr key={container.Id}>
                   <td>{container.Id.substring(0, 12)}</td>
@@ -38,8 +45,13 @@ class Containers extends Component {
                   <td>{container.Status}</td>
                   <td>{JSON.stringify(container.Ports)}</td>
                   <td><button onClick={this.redirect.bind(this, container.Id)}>view</button></td>
-                  <td><button onClick={startContainer.bind(this, container.Id)}>startContainer</button></td>
-                  <td><button onClick={stopContainer.bind(this, container.Id)}>stopContainer</button></td>
+                  <td>
+                    {isRunning ?
+                      <button onClick={stopContainer.bind(this, container.Id)}>stopContainer</button>
+                    :
+                      <button onClick={startContainer.bind(this, container.Id)}>startContainer</button>
+                    }
+                  </td>
                 </tr>
               );
             })}

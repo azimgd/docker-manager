@@ -1,4 +1,3 @@
-import fs from 'fs';
 import Docker from 'dockerode';
 const docker = new Docker({
   socketPath: '/var/run/docker.sock'
@@ -49,13 +48,21 @@ const startContainer = (containerId) => {
         return reject(err);
       }
 
-      return resolve({
-        json: "",
-        reason: "container started",
-        statusCode: 200,
-        data: { Id: containerId }
-      });
+      return resolve({ Id: containerId });
     })
+  }).then((containerId) => {
+    return listContainers().then((containers) => {
+      const { data } = containers;
+
+      return Object.assign({}, containerId, { Containers: data });
+    });
+  }).then((data) => {
+    return {
+      json: "",
+      reason: "container started",
+      statusCode: 200,
+      data
+    }
   });
 }
 
@@ -68,13 +75,21 @@ const restartContainer = (containerId) => {
         return reject(err);
       }
 
-      return resolve({
-        json: "",
-        reason: "container restarted",
-        statusCode: 200,
-        data: { Id: containerId }
-      });
+      return resolve({ Id: containerId });
     })
+  }).then((containerId) => {
+    return listContainers().then((containers) => {
+      const { data } = containers;
+
+      return Object.assign({}, containerId, { Containers: data });
+    });
+  }).then((data) => {
+    return {
+      json: "",
+      reason: "container restarted",
+      statusCode: 200,
+      data
+    }
   });
 }
 
@@ -87,13 +102,21 @@ const stopContainer = (containerId) => {
         return reject(err);
       }
 
-      return resolve({
-        json: "",
-        reason: "container stopped",
-        statusCode: 200,
-        data: { Id: containerId }
-      });
+      return resolve({ Id: containerId });
     })
+  }).then((containerId) => {
+    return listContainers().then((containers) => {
+      const { data } = containers;
+
+      return Object.assign({}, containerId, { Containers: data });
+    });
+  }).then((data) => {
+    return {
+      json: "",
+      reason: "container stopped",
+      statusCode: 200,
+      data
+    }
   });
 }
 
