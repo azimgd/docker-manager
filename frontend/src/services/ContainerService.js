@@ -22,6 +22,10 @@ class ContainerService {
   restartContainer(containerId) {
     return axios.get(baseUrl + '/containers/' + containerId + '/restart').then(res => res.data);
   }
+
+  createContainer(cfg) {
+    return axios.post(baseUrl + '/containers/create', cfg).then(res => res.data);
+  }
 }
 
 export default new ContainerService();

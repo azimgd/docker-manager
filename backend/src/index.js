@@ -37,6 +37,14 @@ const stopContainer = (req, res) => {
     .catch(err => res.status(500).json(err));
 };
 
+const createContainer = (req, res) => {
+  const cfg = req.body || {};
+
+  Docker.createContainer(cfg)
+    .then(data => res.json(data))
+    .catch(err => res.status(500).json(err));
+};
+
 const getImages = (req, res) => {
   Docker.listImages()
     .then(images => res.json(images))
@@ -44,6 +52,7 @@ const getImages = (req, res) => {
 };
 
 Express.get('/containers', getContainers);
+Express.post('/containers/create', createContainer);
 Express.get('/containers/:id', inspectContainer);
 Express.get('/containers/:id/start', startContainer);
 Express.get('/containers/:id/restart', restartContainer);

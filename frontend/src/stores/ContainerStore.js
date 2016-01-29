@@ -25,7 +25,11 @@ class ContainerStore {
       onRestartContainerLoading: ContainerActions.RESTART_CONTAINER_LOADING,
       onRestartContainerFail: ContainerActions.RESTART_CONTAINER_FAIL,
 
-      onClearErrors: ContainerActions.CLEAR_ERRORS,
+      onCreateContainerSuccess: ContainerActions.CREATE_CONTAINER_SUCCESS,
+      onCreateContainerLoading: ContainerActions.CREATE_CONTAINER_LOADING,
+      onCreateContainerFail: ContainerActions.CREATE_CONTAINER_FAIL,
+
+      onSetDefaultStatus: ContainerActions.SET_DEFAULT_STATUS,
     });
 
     this.registerAsync(ContainerSource);
@@ -120,10 +124,26 @@ class ContainerStore {
     this.state.containers = res.data.Containers;
   }
 
+  onCreateContainerFail(err) {
+    this.state.isLoading.createContainer = false;
+    this.state.errors = [err.data.reason];
+  }
+
+  onCreateContainerLoading() {
+    this.state.isLoading.createContainer = true;
+  }
+
+  onCreateContainerSuccess(res) {
+    this.state.isLoading.createContainer = false;
+    this.state.msgs = [res.reason];
+    this.state.containers = res.data.Containers;
+  }
+
   /**
    *
    */
-  onClearErrors() {
+  onSetDefaultStatus() {
+    this.state.msgs = [];
     this.state.errors = [];
   }
 }

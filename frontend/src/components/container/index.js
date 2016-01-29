@@ -4,6 +4,7 @@ import ContainerStore from '../../stores/ContainerStore';
 import Alerts from '../shared/alerts';
 import List from './sub/list';
 import Show from './sub/show';
+import Create from './sub/create';
 
 import cssmodules from 'react-css-modules';
 import styles from './container.styl';
@@ -17,6 +18,7 @@ class Container extends Component {
     this.startContainer = this.startContainer.bind(this);
     this.stopContainer = this.stopContainer.bind(this);
     this.restartContainer = this.restartContainer.bind(this);
+    this.createContainer = this.createContainer.bind(this);
     this.state = ContainerStore.getState();
   }
 
@@ -52,6 +54,10 @@ class Container extends Component {
     ContainerStore.restartContainer(containerId);
   }
 
+  createContainer(cfg) {
+    ContainerStore.createContainer(cfg);
+  }
+
   render() {
     return (
       <div>
@@ -60,13 +66,20 @@ class Container extends Component {
           msgs={this.state.msgs}
         />
 
-        {this.props.params.id ?
+        {this.props.route.action === 'containers.show' ?
           <Show
             container={this.state.container}
           />
         : null}
 
-        {!this.props.params.id ?
+        {this.props.route.action === 'containers.create' ?
+          <Create
+            imageId={this.props.params.imageId}
+            createContainer={this.createContainer}
+          />
+        : null}
+
+        {this.props.route.action === 'containers.all' ?
           <List
             containers={this.state.containers}
             getContainers={this.getContainers}
@@ -81,6 +94,7 @@ class Container extends Component {
 }
 
 Container.propTypes = {
+  route: React.PropTypes.object.isRequired,
   params: React.PropTypes.object.isRequired,
 };
 

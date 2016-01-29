@@ -7,15 +7,22 @@ import Container from './components/container/index';
 import Image from './components/image/index';
 
 import ContainerStore from './stores/ContainerStore';
+import ContainerActions from './actions/ContainerActions';
 
 const onEnter = {
   containers: {
     all: (state, transition) => {
+      ContainerActions.setDefaultStatus();
       ContainerStore.getContainers();
     },
 
     show: (state, transition) => {
+      ContainerActions.setDefaultStatus();
       ContainerStore.getContainer(state.params.id);
+    },
+
+    create: (state, transition) => {
+      ContainerActions.setDefaultStatus();
     }
   },
 };
@@ -25,9 +32,10 @@ class Routes extends Component {
     return (
       <Router history={browserHistory}>
         <Route path="/" component={Layout}>
-          <Route path="containers" component={Container} onEnter={onEnter.containers.all}/>
-          <Route path="containers/:id" component={Container} onEnter={onEnter.containers.show}/>
-          <Route path="images" component={Image}/>
+          <Route path="containers/create/:imageId" component={Container} onEnter={onEnter.containers.create} action="containers.create" />
+          <Route path="containers/:id" component={Container} onEnter={onEnter.containers.show} action="containers.show" />
+          <Route path="containers" component={Container} onEnter={onEnter.containers.all} action="containers.all" />
+          <Route path="images" component={Image} action="images.all" />
         </Route>
       </Router>
     );

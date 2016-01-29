@@ -61,10 +61,22 @@ class ContainerActions {
     return data;
   }
 
+  createContainerSuccess(data) {
+    return data;
+  }
+
+  createContainerFail(err) {
+    return err;
+  }
+
+  createContainerLoading(data) {
+    return data;
+  }
+
   /**
    * Common
    */
-  clearErrors(err = '') {
+  setDefaultStatus(err = '') {
     return err;
   }
 }

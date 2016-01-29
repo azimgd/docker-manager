@@ -48,6 +48,15 @@ const ContainerSource = (alt) => {
       success: ContainerActions.restartContainerSuccess,
       error: ContainerActions.restartContainerFail,
     },
+
+    createContainer: {
+      remote(state, cfg) {
+        return ContainerService.createContainer(cfg);
+      },
+      loading: ContainerActions.createContainerLoading,
+      success: ContainerActions.createContainerSuccess,
+      error: ContainerActions.createContainerFail,
+    },
   };
 };
 

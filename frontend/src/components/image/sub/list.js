@@ -2,6 +2,14 @@ import React, { Component } from 'react';
 import uuid from 'uuid';
 
 class Image extends Component {
+  constructor(props) {
+    super(props);
+  }
+
+  redirect(imageId) {
+    this.context.history.pushState(null, '/containers/create/' + imageId);
+  }
+
   render() {
     return (
       <div>
@@ -14,6 +22,7 @@ class Image extends Component {
             <tr>
               <th>ID</th>
               <th>Tags</th>
+              <th></th>
             </tr>
           </thead>
           <tbody>
@@ -22,6 +31,7 @@ class Image extends Component {
                 <tr key={uuid.v1()}>
                   <td>{image.Id}</td>
                   <td>{image.RepoTags.join()}</td>
+                  <td><button onClick={this.redirect.bind(this, image.Id)}>Create container</button></td>
                 </tr>
               );
             })}
@@ -31,6 +41,11 @@ class Image extends Component {
     );
   }
 }
+
+Image.contextTypes = {
+  location: React.PropTypes.object,
+  history: React.PropTypes.object,
+};
 
 Image.propTypes = {
   fetchImages: React.PropTypes.func.isRequired,

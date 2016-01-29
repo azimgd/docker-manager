@@ -138,36 +138,41 @@ const listImages = () => {
 }
 
 const createContainer = (cfg) => {
-  const config = Object.assign({
-    Image: 'ubuntu',
-    Cmd: ['/bin/bash'],
-    name: 'ubuntu-test'
-  }, cfg);
+  const config = Object.assign({}, cfg);
 
   return new Promise((resolve, reject) => {
     docker.createContainer(config, (err, container) => {
-      container.start((err, data) => {
-        if(err) {
-          return reject(err);
-        }
+      if(err) {
+        return reject(err);
+      }
 
-        return resolve({
-          json: "",
-          reason: "container created",
-          statusCode: 200,
-          data
-        });
-      });
+      resolve({ Id: container.id });
+    })
+  })
+  .then((container) => {
+    return listContainers().then((containers) => {
+      const { data } = containers;
+
+      return Object.assign({}, container, { Containers: data });
     });
+  })
+  .then((data) => {
+    return {
+      json: "",
+      reason: "container created",
+      statusCode: 200,
+      data
+    }
   });
 }
 
 
 export default {
+  createContainer,
   listContainers,
   inspectContainer,
   startContainer,
   restartContainer,
   stopContainer,
-  listImages
+  listImages,
 };
