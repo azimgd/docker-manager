@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 
+import cssmodules from 'react-css-modules';
+import styles from '../container.styl';
+
 class Create extends Component {
   constructor(props) {
     super(props);
@@ -23,18 +26,18 @@ class Create extends Component {
 
   render() {
     return (
-      <div>
-        <div>
-          <input type="text" name="Image" placeholder="Image" defaultValue={this.state.Image} onChange={this.handleChange.bind(this)}/>
+      <div styleName="Form">
+        <div styleName="Form-group">
+          <input type="text" name="Image" placeholder="Image" styleName="Form-control" defaultValue={this.state.Image} onChange={this.handleChange.bind(this)}/>
         </div>
-        <div>
-          <input type="text" name="Name" placeholder="Name" defaultValue={this.state.Name} onChange={this.handleChange.bind(this)}/>
+        <div styleName="Form-group">
+          <input type="text" name="Name" placeholder="Name" styleName="Form-control" defaultValue={this.state.Name} onChange={this.handleChange.bind(this)}/>
         </div>
-        <div>
-          <input type="text" name="Cmd" placeholder="Cmd" defaultValue={this.state.Cmd} onChange={this.handleChange.bind(this)}/>
+        <div styleName="Form-group">
+          <input type="text" name="Cmd" placeholder="Cmd" styleName="Form-control" defaultValue={this.state.Cmd} onChange={this.handleChange.bind(this)}/>
         </div>
 
-        <button onClick={this.handleSubmit.bind(this)}>Create container</button>
+        <button styleName="Btn" onClick={this.handleSubmit.bind(this)}>Create container</button>
       </div>
     );
   }
@@ -45,4 +48,4 @@ Create.propTypes = {
   createContainer: React.PropTypes.func.isRequired,
 };
 
-export default Create;
+export default cssmodules(Create, styles);
