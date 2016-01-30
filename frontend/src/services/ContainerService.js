@@ -11,8 +11,8 @@ class ContainerService {
     return axios.get(baseUrl + '/containers/' + containerId).then(res => res.data);
   }
 
-  startContainer(containerId) {
-    return axios.get(baseUrl + '/containers/' + containerId + '/start').then(res => res.data);
+  startContainer(containerId, cfg) {
+    return axios.post(baseUrl + '/containers/' + containerId + '/start', cfg).then(res => res.data);
   }
 
   stopContainer(containerId) {

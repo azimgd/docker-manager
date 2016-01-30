@@ -13,6 +13,16 @@ class Containers extends Component {
     return container.Status.substring(0, 2) === 'Up';
   }
 
+  beautifyPorts(data) {
+    return data.map(item => {
+      const publicPort = (item.PublicPort) ? `${item.IP}:${item.PublicPort}->` : '';
+      const privatePort = (item.PrivatePort) ? `${item.PrivatePort}` : '';
+      const type = (item.Type) ? `/${item.Type}` : '';
+
+      return `${publicPort}${privatePort}${type}`;
+    });
+  }
+
   render() {
     const startContainer = this.props.startContainer;
     const stopContainer = this.props.stopContainer;
@@ -44,7 +54,7 @@ class Containers extends Component {
                   <td>{container.Id.substring(0, 12)}</td>
                   <td>{container.Image}</td>
                   <td>{container.Status}</td>
-                  <td>{JSON.stringify(container.Ports)}</td>
+                  <td>{this.beautifyPorts(container.Ports).join(', ')}</td>
                   <td><button onClick={this.redirect.bind(this, container.Id)}>view</button></td>
                   <td>
                     {isRunning ?

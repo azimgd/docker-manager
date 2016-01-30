@@ -39,11 +39,11 @@ const inspectContainer = (containerId) => {
   });
 }
 
-const startContainer = (containerId) => {
+const startContainer = (containerId, cfg = {}) => {
   return new Promise((resolve, reject) => {
     const container = docker.getContainer(containerId);
 
-    container.start((err, data) => {
+    container.start(cfg, (err, data) => {
       if(err) {
         return reject(err);
       }

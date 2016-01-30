@@ -23,8 +23,9 @@ const ContainerSource = (alt) => {
     },
 
     startContainer: {
-      remote(state, containerId) {
-        return ContainerService.startContainer(containerId);
+      remote(state, containerId, cfg = {}) {
+        console.log(cfg);
+        return ContainerService.startContainer(containerId, cfg);
       },
       loading: ContainerActions.startContainerLoading,
       success: ContainerActions.startContainerSuccess,
