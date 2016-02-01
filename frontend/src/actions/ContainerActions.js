@@ -73,6 +73,18 @@ class ContainerActions {
     return data;
   }
 
+  removeContainerSuccess(data) {
+    return data;
+  }
+
+  removeContainerFail(err) {
+    return err;
+  }
+
+  removeContainerLoading(data) {
+    return data;
+  }
+
   /**
    * Common
    */

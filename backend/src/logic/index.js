@@ -120,6 +120,33 @@ const stopContainer = (containerId) => {
   });
 }
 
+const removeContainer = (containerId) => {
+  return new Promise((resolve, reject) => {
+    const container = docker.getContainer(containerId);
+
+    container.remove((err, data) => {
+      if(err) {
+        return reject(err);
+      }
+
+      return resolve({ Id: containerId });
+    })
+  }).then((containerId) => {
+    return listContainers().then((containers) => {
+      const { data } = containers;
+
+      return Object.assign({}, containerId, { Containers: data });
+    });
+  }).then((data) => {
+    return {
+      json: "",
+      reason: "container removed",
+      statusCode: 200,
+      data
+    }
+  });
+}
+
 const listImages = () => {
   return new Promise((resolve, reject) => {
     docker.listImages((err, images) => {
@@ -174,5 +201,6 @@ export default {
   startContainer,
   restartContainer,
   stopContainer,
+  removeContainer,
   listImages,
 };

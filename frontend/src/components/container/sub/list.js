@@ -27,6 +27,7 @@ class Containers extends Component {
     const startContainer = this.props.startContainer;
     const stopContainer = this.props.stopContainer;
     const restartContainer = this.props.restartContainer;
+    const removeContainer = this.props.removeContainer;
 
     return (
       <div>
@@ -63,7 +64,10 @@ class Containers extends Component {
                         <button onClick={restartContainer.bind(this, container.Id)}>restartContainer</button>
                       </div>
                     :
-                      <button onClick={startContainer.bind(this, container.Id)}>startContainer</button>
+                      <div>
+                        <button onClick={startContainer.bind(this, container.Id)}>startContainer</button>
+                        <button onClick={removeContainer.bind(this, container.Id)}>removeContainer</button>
+                      </div>
                     }
                   </td>
                 </tr>
@@ -86,6 +90,7 @@ Containers.propTypes = {
   startContainer: React.PropTypes.func.isRequired,
   stopContainer: React.PropTypes.func.isRequired,
   restartContainer: React.PropTypes.func.isRequired,
+  removeContainer: React.PropTypes.func.isRequired,
   containers: React.PropTypes.array.isRequired,
 };
 

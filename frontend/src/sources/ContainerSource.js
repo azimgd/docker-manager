@@ -58,6 +58,15 @@ const ContainerSource = (alt) => {
       success: ContainerActions.createContainerSuccess,
       error: ContainerActions.createContainerFail,
     },
+
+    removeContainer: {
+      remote(state, containerId) {
+        return ContainerService.removeContainer(containerId);
+      },
+      loading: ContainerActions.removeContainerLoading,
+      success: ContainerActions.removeContainerSuccess,
+      error: ContainerActions.removeContainerFail,
+    },
   };
 };
 

@@ -26,6 +26,10 @@ class ContainerService {
   createContainer(cfg) {
     return axios.post(baseUrl + '/containers/create', cfg).then(res => res.data);
   }
+
+  removeContainer(containerId) {
+    return axios.get(baseUrl + '/containers/' + containerId + '/remove').then(res => res.data);
+  }
 }
 
 export default new ContainerService();

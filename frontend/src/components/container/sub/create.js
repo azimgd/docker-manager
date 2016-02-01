@@ -20,10 +20,10 @@ class Create extends Component {
     const value = event.target.value;
     const data = (type === 'string') ? value : this.state[event.target.name].concat([value]);
 
-    if(!value || 0 === value.length) {
+    if (!value || value.length === 0) {
       return;
     } else {
-      event.target.value = "";
+      event.target.value = '';
     }
 
     this.setState({
@@ -47,6 +47,7 @@ class Create extends Component {
 
   render() {
     const mountsFormat = { "Source": "/data", "Destination": "/data", "Mode": "ro,Z", "RW": false };
+
     return (
       <div styleName="Form">
         <div styleName="Form-group">

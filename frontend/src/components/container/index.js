@@ -19,6 +19,7 @@ class Container extends Component {
     this.stopContainer = this.stopContainer.bind(this);
     this.restartContainer = this.restartContainer.bind(this);
     this.createContainer = this.createContainer.bind(this);
+    this.removeContainer = this.removeContainer.bind(this);
     this.state = ContainerStore.getState();
   }
 
@@ -58,6 +59,10 @@ class Container extends Component {
     ContainerStore.createContainer(cfg);
   }
 
+  removeContainer(containerId) {
+    ContainerStore.removeContainer(containerId);
+  }
+
   render() {
     return (
       <div>
@@ -86,6 +91,7 @@ class Container extends Component {
             startContainer={this.startContainer}
             stopContainer={this.stopContainer}
             restartContainer={this.restartContainer}
+            removeContainer={this.removeContainer}
           />
         : null}
       </div>
