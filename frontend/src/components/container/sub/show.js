@@ -66,7 +66,7 @@ class Show extends Component {
         <div styleName="Info-field">
           <div styleName="Info-field-title">Env</div>
           <div styleName="Info-field-text">
-            {container.Config.Env.join(', ')}
+            {container.Config.Env}
           </div>
         </div>
         <div styleName="Info-field">
