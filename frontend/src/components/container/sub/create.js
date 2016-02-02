@@ -82,7 +82,7 @@ class Create extends Component {
           <small>{JSON.stringify(mountsFormat)}</small>
         </div>
 
-        <button styleName="Btn" onClick={this.handleSubmit.bind(this)}>Create container</button>
+        <button onClick={this.handleSubmit.bind(this)}>Create container</button>
       </div>
     );
   }

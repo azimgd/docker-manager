@@ -74,6 +74,10 @@ class Container extends Component {
         {this.props.route.action === 'containers.show' ?
           <Show
             container={this.state.container}
+            startContainer={this.startContainer}
+            stopContainer={this.stopContainer}
+            restartContainer={this.restartContainer}
+            removeContainer={this.removeContainer}
           />
         : null}
 
