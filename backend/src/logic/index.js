@@ -164,6 +164,33 @@ const listImages = () => {
   });
 }
 
+const removeImage = (imageId) => {
+  return new Promise((resolve, reject) => {
+    const image = docker.getImage(imageId);
+
+    image.remove((err, data) => {
+      if(err) {
+        return reject(err);
+      }
+
+      return resolve({ Id: imageId });
+    })
+  }).then((imageId) => {
+    return listImages().then((images) => {
+      const { data } = images;
+
+      return Object.assign({}, imageId, { Images: data });
+    });
+  }).then((data) => {
+    return {
+      json: "",
+      reason: "image removed",
+      statusCode: 200,
+      data
+    }
+  });
+}
+
 const createContainer = (cfg) => {
   const config = Object.assign({}, cfg);
 
@@ -203,4 +230,5 @@ export default {
   stopContainer,
   removeContainer,
   listImages,
+  removeImage,
 };

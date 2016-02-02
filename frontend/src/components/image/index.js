@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import ImageStore from '../../stores/ImageStore';
 
+import Alerts from '../shared/alerts';
 import List from './sub/list';
 
 import cssmodules from 'react-css-modules';
@@ -12,6 +13,7 @@ class Image extends Component {
 
     this.onChange = this.onChange.bind(this);
     this.fetchImages = this.fetchImages.bind(this);
+    this.removeImage = this.removeImage.bind(this);
     this.state = ImageStore.getState();
   }
 
@@ -32,12 +34,24 @@ class Image extends Component {
     ImageStore.getImages();
   }
 
+  removeImage(imageId) {
+    ImageStore.removeImage(imageId);
+  }
+
   render() {
     return (
-      <List
-        images={this.state.images}
-        fetchImages={this.fetchImages}
-      />
+      <div>
+        <Alerts
+          errors={this.state.errors}
+          msgs={this.state.msgs}
+        />
+
+        <List
+          images={this.state.images}
+          fetchImages={this.fetchImages}
+          removeImage={this.removeImage}
+        />
+      </div>
     );
   }
 }

@@ -12,6 +12,14 @@ const ImageSource = (alt) => {
       success: ImageActions.getImagesSuccess,
       error: ImageActions.getImagesFail,
     },
+    removeImage: {
+      remote(state, imageId) {
+        return ImageService.removeImage(imageId);
+      },
+      loading: ImageActions.removeImageLoading,
+      success: ImageActions.removeImageSuccess,
+      error: ImageActions.removeImageFail,
+    },
   };
 };
 

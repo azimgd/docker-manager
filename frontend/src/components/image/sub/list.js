@@ -11,6 +11,8 @@ class Image extends Component {
   }
 
   render() {
+    const removeImage = this.props.removeImage;
+
     return (
       <div>
         <div style={{ marginBottom: '20px' }}>
@@ -31,7 +33,10 @@ class Image extends Component {
                 <tr key={uuid.v1()}>
                   <td>{image.Id}</td>
                   <td>{image.RepoTags.join()}</td>
-                  <td><button onClick={this.redirect.bind(this, image.Id)}>Create container</button></td>
+                  <td>
+                    <button onClick={this.redirect.bind(this, image.Id)}>Create container</button>
+                    <button onClick={removeImage.bind(this, image.Id)}>Remove image</button>
+                  </td>
                 </tr>
               );
             })}
@@ -49,6 +54,7 @@ Image.contextTypes = {
 
 Image.propTypes = {
   fetchImages: React.PropTypes.func.isRequired,
+  removeImage: React.PropTypes.func.isRequired,
   images: React.PropTypes.array.isRequired,
 };
 

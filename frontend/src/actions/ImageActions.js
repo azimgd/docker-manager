@@ -12,6 +12,18 @@ class ImageActions {
   getImagesLoading(data) {
     return data;
   }
+
+  removeImageSuccess(data) {
+    return data;
+  }
+
+  removeImageFail(data) {
+    return data;
+  }
+
+  removeImageLoading(data) {
+    return data;
+  }
 }
 
 module.exports = alt.createActions(ImageActions);

@@ -61,6 +61,14 @@ const getImages = (req, res) => {
     .catch(err => res.status(500).json(err));
 };
 
+const removeImage = (req, res) => {
+  const imageId = req.params.id || null;
+
+  Docker.removeImage(imageId)
+    .then(data => res.json(data))
+    .catch(err => res.status(500).json(err));
+};
+
 Express.get('/containers', getContainers);
 Express.post('/containers/create', createContainer);
 Express.get('/containers/:id', inspectContainer);
@@ -69,5 +77,6 @@ Express.get('/containers/:id/restart', restartContainer);
 Express.get('/containers/:id/stop', stopContainer);
 Express.get('/containers/:id/remove', removeContainer);
 Express.get('/images', getImages);
+Express.get('/images/:id/remove', removeImage);
 
 Express.listen(4000);

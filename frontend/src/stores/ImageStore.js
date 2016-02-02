@@ -8,6 +8,10 @@ class ImageStore {
       onGetImagesSuccess: ImageActions.GET_IMAGES_SUCCESS,
       onGetImagesLoading: ImageActions.GET_IMAGES_LOADING,
       onGetImagesFail: ImageActions.GET_IMAGES_FAIL,
+
+      onRemoveImageSuccess: ImageActions.REMOVE_IMAGE_SUCCESS,
+      onRemoveImageLoading: ImageActions.REMOVE_IMAGE_LOADING,
+      onRemoveImageFail: ImageActions.REMOVE_IMAGE_FAIL,
     });
 
     this.registerAsync(ImageSource);
@@ -18,13 +22,14 @@ class ImageStore {
       msgs: [],
       isLoading: {
         getImages: false,
+        removeImage: false,
       },
     };
   }
 
   onGetImagesFail(err) {
     this.state.isLoading.getImages = false;
-    this.state.errors = err.reason;
+    this.state.errors = [err.data.reason];
   }
 
   onGetImagesLoading() {
@@ -33,8 +38,23 @@ class ImageStore {
 
   onGetImagesSuccess(res) {
     this.state.isLoading.getImages = false;
-    this.state.msgs = res.reason;
+    this.state.msgs = [res.reason];
     this.state.images = res.data;
+  }
+
+  onRemoveImageFail(err) {
+    this.state.isLoading.removeImage = false;
+    this.state.errors = [err.data.reason];
+  }
+
+  onRemoveImageLoading() {
+    this.state.isLoading.removeImage = true;
+  }
+
+  onRemoveImageSuccess(res) {
+    this.state.isLoading.removeImage = false;
+    this.state.msgs = [res.reason];
+    this.state.images = res.data.Images;
   }
 }
 
