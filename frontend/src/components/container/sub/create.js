@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import _ from 'lodash';
 
 import cssmodules from 'react-css-modules';
 import styles from '../container.styl';
@@ -12,7 +13,7 @@ class Create extends Component {
       Name: null,
       Cmd: [],
       Env: [],
-      Mounts: [],
+      Volumes: [],
     };
   }
 
@@ -20,19 +21,31 @@ class Create extends Component {
     const value = event.target.value;
     const data = (type === 'string') ? value : this.state[event.target.name].concat([value]);
 
-    if (!value || value.length === 0) {
+    if (value && value.length === 0) {
       return;
-    } else {
-      event.target.value = '';
     }
 
+    event.target.value = '';
     this.setState({
       [event.target.name]: data,
     });
   }
 
-  handleSubmit() {
-    this.props.createContainer(this.state);
+  generateRequest(data) {
+    const obj = {};
+
+    if (data.hasOwnProperty('Volumes')) {
+      obj.Volumes = _.transform(data.Volumes, (acc, val) => {
+        return Object.assign(acc, { [val]: {} });
+      }, {});
+    }
+
+    return Object.assign({}, data, obj);
+  }
+
+  handleSubmit(data) {
+    const request = this.generateRequest(data);
+    this.props.createContainer(request);
   }
 
   removeEntry(field, position, event) {
@@ -46,8 +59,6 @@ class Create extends Component {
   }
 
   render() {
-    const mountsFormat = { "Source": "/data", "Destination": "/data", "Mode": "ro,Z", "RW": false };
-
     return (
       <div styleName="Form">
         <div styleName="Form-group">
@@ -74,15 +85,15 @@ class Create extends Component {
           <small>"FOO=bar"</small>
         </div>
         <div styleName="Form-group">
-          <label>Mounts</label>
-          {this.state.Mounts.map((item, key) =>
-            <div key={key}>{item} <a href="" onClick={this.removeEntry.bind(this, 'Mounts', key)}>Remove</a></div>
+          <label>Volumes</label>
+          {this.state.Volumes.map((item, key) =>
+            <div key={key}>{item} <a href="" onClick={this.removeEntry.bind(this, 'Volumes', key)}>Remove</a></div>
           )}
-          <input type="text" name="Mounts" placeholder="Mounts" styleName="Form-control" defaultValue={this.state.Mounts} onBlur={this.handleChange.bind(this, 'array')}/>
-          <small>{JSON.stringify(mountsFormat)}</small>
+          <input type="text" name="Volumes" placeholder="Volumes" styleName="Form-control" defaultValue={this.state.Volumes} onBlur={this.handleChange.bind(this, 'array')}/>
+          <small>/var/www</small>
         </div>
 
-        <button onClick={this.handleSubmit.bind(this)}>Create container</button>
+        <button onClick={this.handleSubmit.bind(this, this.state)}>Create container</button>
       </div>
     );
   }

@@ -43,8 +43,8 @@ class Container extends Component {
     ContainerStore.getContainer(containerId);
   }
 
-  startContainer(containerId) {
-    ContainerStore.startContainer(containerId);
+  startContainer(containerId, cfg = {}) {
+    ContainerStore.startContainer(containerId, cfg);
   }
 
   stopContainer(containerId) {
