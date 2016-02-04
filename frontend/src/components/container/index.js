@@ -5,6 +5,7 @@ import Alerts from '../shared/alerts';
 import List from './sub/list';
 import Show from './sub/show';
 import Create from './sub/create';
+import Start from './sub/start';
 
 import cssmodules from 'react-css-modules';
 import styles from './container.styl';
@@ -74,7 +75,6 @@ class Container extends Component {
         {this.props.route.action === 'containers.show' ?
           <Show
             container={this.state.container}
-            startContainer={this.startContainer}
             stopContainer={this.stopContainer}
             restartContainer={this.restartContainer}
             removeContainer={this.removeContainer}
@@ -88,11 +88,17 @@ class Container extends Component {
           />
         : null}
 
+        {this.props.route.action === 'containers.start' ?
+          <Start
+            container={this.state.container}
+            startContainer={this.startContainer}
+          />
+        : null}
+
         {this.props.route.action === 'containers.all' ?
           <List
             containers={this.state.containers}
             getContainers={this.getContainers}
-            startContainer={this.startContainer}
             stopContainer={this.stopContainer}
             restartContainer={this.restartContainer}
             removeContainer={this.removeContainer}

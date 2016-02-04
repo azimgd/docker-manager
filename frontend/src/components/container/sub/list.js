@@ -5,8 +5,12 @@ class Containers extends Component {
     super(props);
   }
 
-  redirect(containerId) {
+  redirectShow(containerId) {
     this.context.history.pushState(null, '/containers/' + containerId);
+  }
+
+  redirectStart(containerId) {
+    this.context.history.pushState(null, '/containers/start/' + containerId);
   }
 
   isContainerRunning(container) {
@@ -24,7 +28,6 @@ class Containers extends Component {
   }
 
   render() {
-    const startContainer = this.props.startContainer;
     const stopContainer = this.props.stopContainer;
     const restartContainer = this.props.restartContainer;
     const removeContainer = this.props.removeContainer;
@@ -56,7 +59,7 @@ class Containers extends Component {
                   <td>{container.Image}</td>
                   <td>{container.Status}</td>
                   <td>{this.beautifyPorts(container.Ports).join(', ')}</td>
-                  <td><button onClick={this.redirect.bind(this, container.Id)}>view</button></td>
+                  <td><button onClick={this.redirectShow.bind(this, container.Id)}>view</button></td>
                   <td>
                     {isRunning ?
                       <div>
@@ -65,7 +68,7 @@ class Containers extends Component {
                       </div>
                     :
                       <div>
-                        <button onClick={startContainer.bind(this, container.Id)}>startContainer</button>
+                        <button onClick={this.redirectStart.bind(this, container.Id)}>startContainer</button>
                         <button onClick={removeContainer.bind(this, container.Id)}>removeContainer</button>
                       </div>
                     }
@@ -87,7 +90,6 @@ Containers.contextTypes = {
 
 Containers.propTypes = {
   getContainers: React.PropTypes.func.isRequired,
-  startContainer: React.PropTypes.func.isRequired,
   stopContainer: React.PropTypes.func.isRequired,
   restartContainer: React.PropTypes.func.isRequired,
   removeContainer: React.PropTypes.func.isRequired,

@@ -11,9 +11,11 @@ class Create extends Component {
     this.state = {
       Image: this.props.imageId,
       Name: null,
-      Cmd: [],
+      Cmd: '',
       Env: [],
       Volumes: [],
+      ExposedPorts: [],
+      Binds: [],
     };
   }
 
@@ -25,7 +27,10 @@ class Create extends Component {
       return;
     }
 
-    event.target.value = '';
+    if (type !== 'string') {
+      event.target.value = '';
+    }
+
     this.setState({
       [event.target.name]: data,
     });
@@ -40,6 +45,16 @@ class Create extends Component {
       }, {});
     }
 
+    if (data.hasOwnProperty('ExposedPorts')) {
+      obj.ExposedPorts = _.transform(data.ExposedPorts, (acc, val) => {
+        return Object.assign(acc, { [val]: {} });
+      }, {});
+    }
+
+    if (data.hasOwnProperty('Cmd')) {
+      obj.Cmd = (data.Cmd.length > 0) ? data.Cmd : null;
+    }
+
     return Object.assign({}, data, obj);
   }
 
@@ -51,10 +66,10 @@ class Create extends Component {
   removeEntry(field, position, event) {
     event.preventDefault();
     const array = this.state[field];
-    array.slice(position, 1);
+    array.splice(position, 1);
 
     this.setState({
-      field: array,
+      [field]: array,
     });
   }
 
@@ -71,10 +86,7 @@ class Create extends Component {
         </div>
         <div styleName="Form-group">
           <label>Cmd</label>
-          {this.state.Cmd.map((item, key) =>
-            <div key={key}>{item} <a href="" onClick={this.removeEntry.bind(this, 'Cmd', key)}>Remove</a></div>
-          )}
-          <input type="text" name="Cmd" placeholder="Cmd" styleName="Form-control" defaultValue={this.state.Cmd} onBlur={this.handleChange.bind(this, 'array')}/>
+          <input type="text" name="Cmd" placeholder="Cmd" styleName="Form-control" defaultValue={this.state.Cmd} onBlur={this.handleChange.bind(this, 'string')}/>
         </div>
         <div styleName="Form-group">
           <label>Env</label>
@@ -91,6 +103,22 @@ class Create extends Component {
           )}
           <input type="text" name="Volumes" placeholder="Volumes" styleName="Form-control" defaultValue={this.state.Volumes} onBlur={this.handleChange.bind(this, 'array')}/>
           <small>/var/www</small>
+        </div>
+        <div styleName="Form-group">
+          <label>ExposedPorts</label>
+          {this.state.ExposedPorts.map((item, key) =>
+            <div key={key}>{item} <a href="" onClick={this.removeEntry.bind(this, 'ExposedPorts', key)}>Remove</a></div>
+          )}
+          <input type="text" name="ExposedPorts" placeholder="ExposedPorts" styleName="Form-control" defaultValue={this.state.ExposedPorts} onBlur={this.handleChange.bind(this, 'array')}/>
+          <small>80/tcp</small>
+        </div>
+        <div styleName="Form-group">
+          <label>Binds</label>
+          {this.state.Binds.map((item, key) =>
+            <div key={key}>{item} <a href="" onClick={this.removeEntry.bind(this, 'Binds', key)}>Remove</a></div>
+          )}
+          <input type="text" name="Binds" placeholder="Binds" styleName="Form-control" defaultValue={this.state.Binds} onBlur={this.handleChange.bind(this, 'array')}/>
+          <small>/home/vagrant:/stuff</small>
         </div>
 
         <button onClick={this.handleSubmit.bind(this, this.state)}>Create container</button>

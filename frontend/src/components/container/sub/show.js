@@ -4,9 +4,12 @@ import cssmodules from 'react-css-modules';
 import styles from '../container.styl';
 
 class Show extends Component {
+  redirect(containerId) {
+    this.context.history.pushState(null, '/containers/start/' + containerId);
+  }
+
   render() {
     const container = this.props.container;
-    const startContainer = this.props.startContainer;
     const stopContainer = this.props.stopContainer;
     const restartContainer = this.props.restartContainer;
     const removeContainer = this.props.removeContainer;
@@ -33,7 +36,7 @@ class Show extends Component {
               </div>
             :
               <div>
-                <button onClick={startContainer.bind(this, container.Id)}>startContainer</button>
+                <button onClick={this.redirect.bind(this, container.Id)}>startContainer</button>
                 <button onClick={removeContainer.bind(this, container.Id)}>removeContainer</button>
               </div>
             }
@@ -75,6 +78,12 @@ class Show extends Component {
             {container.HostConfig.Binds}
           </div>
         </div>
+        <div styleName="Info-field">
+          <div styleName="Info-field-title">Exposed Ports</div>
+          <div styleName="Info-field-text">
+            {JSON.stringify(container.Config.ExposedPorts)}
+          </div>
+        </div>
 
         <div styleName="Info-scrollable">
           <div styleName="Info-field-title">Logs</div>
@@ -89,10 +98,14 @@ class Show extends Component {
 
 Show.propTypes = {
   container: React.PropTypes.object.isRequired,
-  startContainer: React.PropTypes.func.isRequired,
   stopContainer: React.PropTypes.func.isRequired,
   restartContainer: React.PropTypes.func.isRequired,
   removeContainer: React.PropTypes.func.isRequired,
+};
+
+Show.contextTypes = {
+  location: React.PropTypes.object,
+  history: React.PropTypes.object,
 };
 
 export default cssmodules(Show, styles);

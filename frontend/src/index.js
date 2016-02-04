@@ -23,7 +23,12 @@ const onEnter = {
 
     create: (state, transition) => {
       ContainerActions.setDefaultStatus();
-    }
+    },
+
+    start: (state, transition) => {
+      ContainerActions.setDefaultStatus();
+      ContainerStore.getContainer(state.params.id);
+    },
   },
 };
 
@@ -33,6 +38,7 @@ class Routes extends Component {
       <Router history={browserHistory}>
         <Route path="/" component={Layout}>
           <Route path="containers/create/:imageId" component={Container} onEnter={onEnter.containers.create} action="containers.create" />
+          <Route path="containers/start/:id" component={Container} onEnter={onEnter.containers.start} action="containers.start" />
           <Route path="containers/:id" component={Container} onEnter={onEnter.containers.show} action="containers.show" />
           <Route path="containers" component={Container} onEnter={onEnter.containers.all} action="containers.all" />
           <Route path="images" component={Image} action="images.all" />
