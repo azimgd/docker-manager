@@ -10,6 +10,7 @@ class Start extends Component {
 
     this.state = {
       Binds: [],
+      PortBindings: [],
     };
   }
 
@@ -17,7 +18,7 @@ class Start extends Component {
     const value = event.target.value;
     const data = (type === 'string') ? value : this.state[event.target.name].concat([value]);
 
-    if (value && value.length === 0) {
+    if (value.length === 0) {
       return;
     }
 
@@ -32,6 +33,18 @@ class Start extends Component {
 
   generateRequest(data) {
     const obj = {};
+
+    if (data.hasOwnProperty('PortBindings')) {
+      obj.PortBindings = _.transform(data.PortBindings, (acc, val) => {
+        const ports = val.split(':');
+
+        if(ports.length !== 2) {
+          return acc;
+        }
+
+        return Object.assign(acc, { [ports[0]]: [{ HostPort: ports[1] }] });
+      }, {});
+    }
 
     return Object.assign({}, data, obj);
   }
@@ -53,14 +66,35 @@ class Start extends Component {
 
   render() {
     return (
-      <div styleName="Form">
-        <div styleName="Form-group">
-          <label>Binds</label>
-          {this.state.Binds.map((item, key) =>
-            <div key={key}>{item} <a href="" onClick={this.removeEntry.bind(this, 'Binds', key)}>Remove</a></div>
-          )}
-          <input type="text" name="Binds" placeholder="Binds" styleName="Form-control" defaultValue={this.state.Binds} onBlur={this.handleChange.bind(this, 'array')}/>
-          <small>/home/vagrant:/stuff</small>
+      <div>
+        <div styleName="Info-field">
+          <div styleName="Info-field-title">Binds</div>
+          <div styleName="Info-field-text">
+            {this.state.Binds.map((item, key) =>
+              <div key={key}>{item} <a href="" onClick={this.removeEntry.bind(this, 'Binds', key)}>Remove</a></div>
+            )}
+          </div>
+          <div styleName="Info-field-text">
+            <input type="text" name="Binds" placeholder="Binds" styleName="Form-control" defaultValue={this.state.Binds} onBlur={this.handleChange.bind(this, 'array')}/>
+          </div>
+          <div styleName="Info-field-subtext">
+            /home/vagrant:/stuff
+          </div>
+        </div>
+
+        <div styleName="Info-field">
+          <div styleName="Info-field-title">PortBindings</div>
+          <div styleName="Info-field-text">
+            {this.state.PortBindings.map((item, key) =>
+              <div key={key}>{item} <a href="" onClick={this.removeEntry.bind(this, 'PortBindings', key)}>Remove</a></div>
+            )}
+          </div>
+          <div styleName="Info-field-text">
+            <input type="text" name="PortBindings" placeholder="PortBindings" styleName="Form-control" defaultValue={this.state.PortBindings} onBlur={this.handleChange.bind(this, 'array')}/>
+          </div>
+          <div styleName="Info-field-subtext">
+            80/tcp:11022
+          </div>
         </div>
 
         <button onClick={this.handleSubmit.bind(this, this.props.container.Id, this.state)}>Start container</button>

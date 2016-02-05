@@ -208,6 +208,13 @@ const createContainer = (cfg) => {
       Binds: config.Binds,
     });
   })
+  .then((container) => {
+    return listContainers().then((containers) => {
+      const { data } = containers;
+
+      return Object.assign({}, { Id: container.data.Id }, { Containers: data });
+    });
+  })
   .then((data) => {
     return {
       json: "",
